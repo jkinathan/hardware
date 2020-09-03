@@ -1,21 +1,57 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 # Create your models here.
 
 class Inventory(models.Model):
+    TYPES = (
+        ('Elements', 'Elements'),
+        ('Nozzles', 'Nozzles'),
+        ('Rotarheads', 'Rotarheads'),
+        ('Valves', 'Valves'),
+        ('Pumps', 'Pumps'),
+        ('Camplates', 'Camplates'),
+        ('Feedpumps', 'Feedpumps'),
+        ('Housings', 'Housings'),
+        ('Switches', 'Switches'),
+        ('Gasket Kit', 'Gasket Kit'),
+    )
     name = models.CharField(max_length=100)
-    itype = models.CharField(max_length=100)
-    quantity = models.CharField(max_length=20)
-    date_added = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
+    picture = models.ImageField(null=True, blank=True,upload_to='images/')
+    inventory_Type = models.CharField(max_length=50, choices=TYPES,blank=True)
+    i_type = models.CharField(max_length=100,blank=True)
+    engine = models.CharField(max_length=100,blank=True)
+    stamping_number = models.CharField(max_length=100,blank=True)
+    part_number = models.CharField(max_length=100,blank=True)
+    millimeter = models.CharField(max_length=100,blank=True)
+    cut = models.CharField(max_length=100,blank=True)
+    calibration = models.CharField(max_length=100,blank=True)
+    direction_side = models.CharField(max_length=100,blank=True)
+    holes = models.CharField(max_length=100,blank=True)
+    voltage = models.CharField(max_length=100,blank=True)
+    location = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    price = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    #date_added = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
     
     class Meta:
         ordering = ["-name"]
         verbose_name = 'Inventory'
         verbose_name_plural = 'Inventories'
         
+    def picture_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.picture.url))
+    picture_tag.short_description = 'Picture'
+       
     def __str__(self):
         return self.name
-
+# class InventoryType(models.Model):
+#     name = models.CharField(max_length=100)
+    
+#     def __str__(self):
+#         return self.name
 class JobType(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
@@ -38,7 +74,6 @@ class Customer(models.Model):
     amount = models.CharField(max_length=100)
     balance = models.CharField(max_length=100, blank=True)
     date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
-    
     
     def __str__(self):
         return self.name
