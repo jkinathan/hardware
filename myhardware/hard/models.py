@@ -16,6 +16,10 @@ class Inventory(models.Model):
         ('Switches', 'Switches'),
         ('Gasket Kit', 'Gasket Kit'),
     )
+    LOCATION = (
+        ('Home Store', 'Home Store'),
+        ('Work Store', 'Work Store'),
+    )
     name = models.CharField(max_length=100)
     picture = models.ImageField(null=True, blank=True,upload_to='images/')
     inventory_Type = models.CharField(max_length=50, choices=TYPES,blank=True)
@@ -29,7 +33,7 @@ class Inventory(models.Model):
     direction_side = models.CharField(max_length=100,blank=True)
     holes = models.CharField(max_length=100,blank=True)
     voltage = models.CharField(max_length=100,blank=True)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=50, choices=LOCATION,blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -94,3 +98,12 @@ class Workorder(models.Model):
     
     def __str__(self):
         return self.ordername
+    
+class Supplier(models.Model):
+    name = models.CharField(max_length=50)
+    contact = models.CharField(max_length=50)
+    item = models.CharField(max_length=100)
+    itype = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.name
