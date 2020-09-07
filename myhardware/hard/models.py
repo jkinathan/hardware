@@ -84,14 +84,14 @@ class Customer(models.Model):
 
 class Workorder(models.Model):
     MY_CHOICES = (
-        ('a', 'Complete'),
-        ('b', 'Incomplete'),
+        ('Complete', 'Complete'),
+        ('Incomplete', 'Incomplete'),
     )
     ordername = models.CharField(max_length=50)
     customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
     jobtype = models.ForeignKey(JobType, on_delete=models.CASCADE)
     technician = models.ForeignKey(Technician, on_delete=models.CASCADE)
-    order_status = models.CharField(max_length=1, choices=MY_CHOICES)
+    order_status = models.CharField(max_length=20, choices=MY_CHOICES)
     amount_paid = models.CharField(max_length=200)
     balance = models.CharField(max_length=100, blank=True)
     date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))

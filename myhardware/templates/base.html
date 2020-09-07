@@ -10,8 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'plugins/images/favicon.png' %}">
     <title>Hardware</title>
     <!-- Bootstrap Core CSS -->
-    
-    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    {% comment %} <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
     <!-- Menu CSS -->
     <link href="{% static 'plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
     <!-- toast CSS -->
@@ -120,22 +120,22 @@
                 </div>
                 <ul class="nav" id="side-menu">
                     <li style="padding: 70px 0 0;">
-                        <a href="dashboard.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                        <a href="/" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
+                        <a href="#" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
                     </li>
                     <li>
-                        <a href="basic-table.html" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Customers</a>
+                        <a href="{% url 'index' %}" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Customers</a>
                     </li>
                     <li>
-                        <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Inventory</a>
+                        <a href="{% url 'inventory' %}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Inventory</a>
                     </li>
                     <li>
-                        <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Work Orders</a>
+                        <a href="{% url 'workorders' %}" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Work Orders</a>
                     </li>
                     <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Technicians</a>
+                        <a href="{% url 'technicians' %}" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Technicians</a>
                     </li>
               
                 </ul>
@@ -166,8 +166,8 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     
-    <script src="{% static 'plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
-    <!-- Bootstrap Core JavaScript -->
+    {% comment %} <script src="{% static 'plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript --> {% endcomment %}
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!-- Menu Plugin JavaScript -->
     <script src="{% static 'plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
