@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -8,13 +9,17 @@
                 <h4 class="page-title">Create Customer</h4> 
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="white-box">
-                    
+
+
+                   
                     <h3 class="box-title">New Customer</h3>                   
                     <form action="{% url 'createcustomer' %}" method="POST">
                     {% csrf_token %}
+                        <input name="name" class="form-control "id="name">
                         <div class="form-group">
                             <label for="name">Full Name:</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter customer name" name="name">

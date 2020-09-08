@@ -24,12 +24,11 @@
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap.min.css" rel="stylesheet">
     
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript">
+    </script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
@@ -41,6 +40,8 @@
         $('#example').DataTable();
     } );
     </script>
+    
+
 </head>
 
 <body class="fix-header">
@@ -183,8 +184,14 @@
     <script src="{% static 'js/waves.js' %}"></script>
  <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/custom.min.js' %}"></script>
-    <script src="{% static 'js/dashboard1.js' %}"></script>
-    
+    <script type="text/javascript">
+        $(function() {
+        $("#name").autocomplete({
+        source: "",
+        minLength: 2,
+        });
+        });
+    </script>
 </body>
 
 </html>
