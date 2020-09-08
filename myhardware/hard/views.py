@@ -46,7 +46,7 @@ def index(request):
               'inventcount':inventcount,
               'workordercount':workordercount
               }
-    return render(request, 'testsearch.html', context)
+    return render(request, 'index.html', context)
 
 
 def Createcustomer(request):

@@ -19,10 +19,10 @@
                     <h3 class="box-title">New Customer</h3>                   
                     <form action="{% url 'createcustomer' %}" method="POST">
                     {% csrf_token %}
-                        <input name="name" class="form-control "id="name">
+                        
                         <div class="form-group">
                             <label for="name">Full Name:</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter customer name" name="name">
+                            <input type="text" name="name" class="form-control "id="name" placeholder="Enter customer name" name="name">
                         </div>
                         <div class="form-group">
                             <label for="name">Telephone Number:</label>
