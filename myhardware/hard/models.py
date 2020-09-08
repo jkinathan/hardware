@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 
 class Inventory(models.Model):
@@ -74,10 +76,16 @@ class Technician(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     number = models.CharField(max_length=15)
+    
     inventory_purchased = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1,null=False)
     amount = models.CharField(max_length=100)
     balance = models.CharField(max_length=100, blank=True)
     date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
+    addedby = models.ForeignKey(User,on_delete=models.PROTECT, default=1)
+    
+    def get_absolute_url(self):
+        return reverse("customerdetail", kwargs={"pk": self.pk})
     
     def __str__(self):
         return self.name

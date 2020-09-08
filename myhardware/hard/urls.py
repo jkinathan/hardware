@@ -7,7 +7,7 @@ urlpatterns = [
     path('inventory/',views.inventory,name='inventory'),
     path('technicians/',views.technician,name='technicians'),
     path('workorders/',views.workorder,name='workorders'),
-    #path('',views.index,name='index'),
-    #path('post/<int:pk>',views.PostDetailView.as_view(),name="post_detailfunc"),
+    path('createcustomer',views.Createcustomer,name='createcustomer'),
+    path('customerdetail/<int:pk>',views.Customerdetailfunc,name="customerdetail"),
     #path('post/like/<int:pk>',views.likepost,name="likepost"),
 ]

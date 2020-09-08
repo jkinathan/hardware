@@ -15,9 +15,7 @@
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Customers</h3>
                     <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash"></div>
-                        </li>
+                       
                         <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">{{ customercount }}</span></li>
                     </ul>
                 </div>
@@ -26,9 +24,7 @@
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Inventories</h3>
                     <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash2"></div>
-                        </li>
+                       
                         <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">{{ inventcount }}</span></li>
                     </ul>
                 </div>
@@ -37,9 +33,7 @@
                 <div class="white-box analytics-info">
                     <h3 class="box-title">Work Orders</h3>
                     <ul class="list-inline two-part">
-                        <li>
-                            <div id="sparklinedash3"></div>
-                        </li>
+                       
                         <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">{{ workordercount }}</span></li>
                     </ul>
                 </div>
@@ -53,17 +47,18 @@
                 <div class="white-box">
                     
                     <h3 class="box-title">Customer Details</h3>
-                    
+                
                     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Tel-Number</th>
                                 <th>Inventory Purchased</th>
+                                <th>Quantity</th>
                                 <th>Amount Paid (UGX)</th>
                                 <th>Balance (UGX)</th>
                                 <th>Date</th>
-                                
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,9 +67,11 @@
                                 <td>{{ customer.name }}</td>
                                 <td>{{ customer.number }}</td>
                                 <td>{{ customer.inventory_purchased }}</td>
+                                <td>{{ customer.quantity }}</td>
                                 <td>{{ customer.amount }}</td>
                                 <td>{{ customer.balance }}</td>
                                 <td>{{ customer.date }}</td>
+                                <td><a href="{% url 'customerdetail' customer.id %}">Edit</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

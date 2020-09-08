@@ -8,19 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'plugins/images/favicon.png' %}">
-    <title>Hardware</title>
+    <title>United Diesel Management System </title>
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     {% comment %} <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
     <!-- Menu CSS -->
     <link href="{% static 'plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
-    <!-- toast CSS -->
-    <link href="{% static 'plugins/bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
-    <!-- morris CSS -->
-    <link href="{% static 'plugins/bower_components/morrisjs/morris.css' %}" rel="stylesheet">
-    <!-- chartist CSS -->
-    <link href="{% static 'plugins/bower_components/chartist-js/dist/chartist.min.css' %}" rel="stylesheet">
-    <link href="{% static 'plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css' %}" rel="stylesheet">
     <!-- animation CSS -->
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -118,7 +111,20 @@
                 <div class="sidebar-head">
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
                 </div>
+
                 <ul class="nav" id="side-menu">
+                    {% comment %} <li>
+                    <span>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}" role="alert">
+                                {{ message|safe }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    </span>
+                    </li>
+                     {% endcomment %}
                     <li style="padding: 70px 0 0;">
                         <a href="/" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
                     </li>
@@ -127,6 +133,10 @@
                     </li>
                     <li>
                         <a href="{% url 'index' %}" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Customers</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'createcustomer' %}"class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Add Customer</a>
+                    </li>
                     </li>
                     <li>
                         <a href="{% url 'inventory' %}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Inventory</a>
@@ -147,24 +157,20 @@
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
+            
             {% block content %}
+            
 
             {% endblock content %}
  
             </div>
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> 2020 &copy;hardware </footer>
+            <footer class="footer text-center"> 2020 &copy;United Diesel Management System </footer>
         </div>
         <!-- ============================================================== -->
         <!-- End Page Content -->
         <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     
     {% comment %} <script src="{% static 'plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
     <!-- Bootstrap Core JavaScript --> {% endcomment %}
@@ -175,18 +181,10 @@
     <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
     <!--Wave Effects -->
     <script src="{% static 'js/waves.js' %}"></script>
-    <!--Counter js -->
-    <script src="{% static 'plugins/bower_components/waypoints/lib/jquery.waypoints.js' %}"></script>
-    <script src="{% static 'plugins/bower_components/counterup/jquery.counterup.min.js' %}"></script>
-    <!-- chartist chart -->
-    <script src="{% static 'plugins/bower_components/chartist-js/dist/chartist.min.js' %}"></script>
-    <script src="{% static 'plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js' %}"></script>
-    <!-- Sparkline chart JavaScript -->
-    <script src="{% static 'plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
-    <!-- Custom Theme JavaScript -->
+ <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/custom.min.js' %}"></script>
     <script src="{% static 'js/dashboard1.js' %}"></script>
-    <script src="{% static 'plugins/bower_components/toast-master/js/jquery.toast.js' %}"></script>
+    
 </body>
 
 </html>
