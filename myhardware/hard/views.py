@@ -9,32 +9,13 @@ from django.views.generic.edit import FormView
 
 def Autoguy(request):
     if 'term' in request.GET:
-        qs = Customer.objects.filter(name__icontains=request.GET.get('term'))
+        qs = Customer.objects.filter(name__icontains=request.GET.get('term')).distinct()
         names = list()
+        
         for customer in qs:
-            names.append(customer.name)
+            names.append(customer.name) if customer.name not in names else names
         return JsonResponse(names, safe=False)
-    return render(request, 'testsearch.html')
-class AutoCompleteView(FormView):
-    def get(self,request,*args,**kwargs):
-        data = request.GET
-        name = data.get("term")
-        if name:
-            customers = Customer.objects.filter(name__icontains = name)
-        else:
-            customers = Customer.objects.all()
-            results = []
-        for customer in customers:
-            customer_json = {}
-            customer_json['id'] = customer.id
-            customer_json['label'] = customer.name
-            customer_json['value'] = customer.name
-            results.append(customer_json)
-            data = json.dumps(results)
-            mimetype = 'application/json'
-            
-            return HttpResponse(data, mimetype)
-
+    return render(request, 'customer_create.html')
 
 def index(request):
     customers = Customer.objects.all()
@@ -69,7 +50,7 @@ def Createcustomer(request):
             inventory.save()
 
             customer.amount = request.POST["amount"]
-            customer.balance = inventory.price - int(customer.amount)
+            customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
             customer.addedby = request.user
             customer.save()
             
@@ -99,7 +80,7 @@ def Customerdetailfunc(request, pk):
             inventory.save()
             
             customer.amount = request.POST["amount"]
-            customer.balance = inventory.price - int(customer.amount)
+            customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
             customer.addedby = request.user
             customer.save()
             
