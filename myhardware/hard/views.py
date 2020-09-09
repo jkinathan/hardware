@@ -20,7 +20,7 @@ def Autoguy(request):
 
 @login_required
 def index(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.filter(addedby=request.user).values()
     customercount = Customer.objects.all().count()
     inventcount = Inventory.objects.all().count()
     workordercount = Workorder.objects.all().count()

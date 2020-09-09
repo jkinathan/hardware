@@ -126,9 +126,7 @@
                     <li style="padding: 70px 0 0;">
                         <a href="/" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
                     </li>
-                    <li>
-                        <a href="#" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
-                    </li>
+                    
                     <li>
                         <a href="{% url 'index' %}" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Customers</a>
                     </li>
@@ -145,7 +143,9 @@
                     <li>
                         <a href="{% url 'technicians' %}" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Technicians</a>
                     </li>
-              
+                    <li>
+                        <a href="{% url 'account_logout' %}" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Log out</a>
+                    </li>
                 </ul>
                
             </div>

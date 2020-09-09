@@ -30,7 +30,9 @@
             </tr>
         </thead>
         <tbody>
+
         {% for customer in customers %}
+        {% comment %} {% if customer.addedby == request.user %} {% endcomment %}
             <tr>
                 <td>{{ customer.name }}</td>
                 <td>{{ customer.number }}</td>
@@ -39,7 +41,13 @@
                 <td>{{ customer.balance }}</td>
                 <td>{{ customer.date }}</td>
             </tr>
+        {% comment %} {% else %}
+            <tr>
+                <td>Unable to access customer details</td>
+            <tr>
+        {% endif %} {% endcomment %}
         {% endfor %}
+
         </tbody>
     </table>
                  
