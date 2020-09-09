@@ -49,16 +49,23 @@ def Createcustomer(request):
             customer.quantity = request.POST["quantity"]
             
             inventory = Inventory.objects.get(id=inventoryid)
-            inventory.quantity -= int(customer.quantity)
-            inventory.save()
-
-            customer.amount = request.POST["amount"]
-            customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
-            customer.addedby = request.user
-            customer.save()
             
-            messages.success(request, 'New Customer added Successfully!!')
-            return redirect('index')
+            if int(customer.quantity) < inventory.quantity:
+                inventory.quantity -= int(customer.quantity)
+                inventory.save()
+                customer.amount = request.POST["amount"]
+                customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
+                customer.addedby = request.user
+                customer.save()
+
+                messages.success(request, 'New Customer added Successfully!!')
+                return redirect('index')
+            
+            else:
+                messages.warning(request, 'Not enough inventory in stock, please contact Administrator')
+                return redirect('index')
+            
+            
     context ={'inventorys':inventorys
               }
     return render(request, 'customer_create.html',context)
@@ -80,16 +87,21 @@ def Customerdetailfunc(request, pk):
             customer.quantity = request.POST["quantity"]
             
             inventory = Inventory.objects.get(id=inventoryid)
-            inventory.quantity -= int(customer.quantity)
-            inventory.save()
+            if int(customer.quantity) < inventory.quantity:
+                inventory.quantity -= int(customer.quantity)
+                inventory.save()
+
+                customer.amount = request.POST["amount"]
+                customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
+                customer.addedby = request.user
+                customer.save()
+
+                messages.warning(request, 'Customer updated Successfully!!')
+                return redirect('index')
+            else:
+                messages.warning(request, 'Not enough inventory in stock, please contact Administrator')
+                return redirect('index')
             
-            customer.amount = request.POST["amount"]
-            customer.balance = inventory.price * int(customer.quantity) - int(customer.amount) * int(customer.quantity)
-            customer.addedby = request.user
-            customer.save()
-            
-            messages.warning(request, 'Customer updated Successfully!!')
-            return redirect('index')
         
     context={'customer': customer, 'inventorys':inventorys}
 
