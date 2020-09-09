@@ -12,5 +12,6 @@ admin.site.register(Inventory,InventoryAdmin),
 admin.site.register(JobType),
 admin.site.register(Technician),
 admin.site.register(Customer),
+admin.site.register(ReturnJobs),
 admin.site.register(Workorder,WorkorderAdmin)
 admin.site.register(Supplier),

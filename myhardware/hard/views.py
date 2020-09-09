@@ -20,8 +20,20 @@ def Autoguy(request):
 
 @login_required
 def index(request):
+    if request.user.is_staff:
+        customers = Customer.objects.all()
+        inventorys = Inventory.objects.all()
+        customercount = Customer.objects.all().count()
+        inventcount = Inventory.objects.all().count()
+        workordercount = Workorder.objects.all().count()
+        context ={'customers':customers,
+              'customercount':customercount,
+              'inventcount':inventcount,
+              'workordercount':workordercount
+              }
     customers = Customer.objects.filter(addedby=request.user)
     # print(customers)
+    inventorys = Inventory.objects.all()
     customercount = Customer.objects.all().count()
     inventcount = Inventory.objects.all().count()
     workordercount = Workorder.objects.all().count()
@@ -30,6 +42,14 @@ def index(request):
               'inventcount':inventcount,
               'workordercount':workordercount
               }
+    
+    for inventory in inventorys:
+        #print(inventory)
+        if request.user.is_staff and inventory.quantity < 12:
+            #print(inventory)
+            messages.warning(request, inventory.name+' are running low in stock Please add more!!')
+            return render(request, 'index.html', context)
+        
     return render(request, 'index.html', context)
 
 @login_required
@@ -62,7 +82,7 @@ def Createcustomer(request):
                 return redirect('index')
             
             else:
-                messages.warning(request, 'Not enough inventory in stock, please contact Administrator')
+                messages.warning(request, inventory.name+' are NOT enough in stock, please contact Administrator')
                 return redirect('index')
             
             
@@ -106,6 +126,74 @@ def Customerdetailfunc(request, pk):
     context={'customer': customer, 'inventorys':inventorys}
 
     return render(request, 'customer_detail.html', context)
+
+@login_required
+def Createworkorder(request):
+    workorder = Workorder()
+    jobtypes = JobType.objects.all()
+    customers = Customer.objects.filter(addedby=request.user)
+    technicians = Technician.objects.all()
+    if request.method == "POST":
+        
+        if "createworkorder" in request.POST: 
+            
+            workorder.ordername = request.POST["ordername"] 
+            #workorder.number = request.POST["number"]
+            customerid = request.POST["name"] 
+            workorder.customer_name = get_object_or_404(Customer,id=customerid)
+            
+            jobid = request.POST["jobtype"] 
+            workorder.jobtype = get_object_or_404(JobType,id=jobid)
+            
+            techid = request.POST["technician"] 
+            workorder.technician = get_object_or_404(Technician,id=techid)
+            
+            workorder.order_status = request.POST["status"]
+            
+            workorder.amount_paid = request.POST["amount"]
+            workorder.balance = request.POST["balance"]
+            workorder.save()
+
+            messages.success(request, 'Workorder added Successfully!!')
+            return redirect('index')
+                        
+    context ={'customers':customers,'jobtypes':jobtypes,'technicians':technicians
+              }
+    return render(request, 'workorder_create.html',context)
+
+@login_required
+def Workorderdetailfunc(request, pk):
+    jobtypes = JobType.objects.all()
+    customers = Customer.objects.filter(addedby=request.user)
+    technicians = Technician.objects.all()
+    workorder = get_object_or_404(Workorder, pk=pk)
+    if request.method == "POST":
+        
+        if "editworkorder" in request.POST: 
+            
+            workorder.ordername = request.POST["ordername"] 
+            #workorder.number = request.POST["number"]
+            customerid = request.POST["name"] 
+            workorder.customer_name = get_object_or_404(Customer,id=customerid)
+            
+            jobid = request.POST["jobtype"] 
+            workorder.jobtype = get_object_or_404(JobType,id=jobid)
+            
+            techid = request.POST["technician"] 
+            workorder.technician = get_object_or_404(Technician,id=techid)
+            
+            workorder.order_status = request.POST["status"]
+            
+            workorder.amount_paid = request.POST["amount"]
+            workorder.balance = request.POST["balance"]
+            workorder.save()
+
+            messages.success(request, 'Workorder Updated Successfully!!')
+            return redirect('workorders')
+                        
+    context ={'customers':customers,'jobtypes':jobtypes,'technicians':technicians,'workorder':workorder
+              }
+    return render(request, 'workorder_detail.html',context)
 
 @login_required
 def inventory(request):

@@ -106,6 +106,21 @@ class Workorder(models.Model):
     
     def __str__(self):
         return self.ordername
+
+class ReturnJobs(models.Model):
+    MY_CHOICES = (
+        ('Complete', 'Complete'),
+        ('Incomplete', 'Incomplete'),
+    )
+    jobname = models.CharField(max_length=100, blank=False)
+    customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    complaint = models.TextField(max_length=200, blank=True)
+    partnumber = models.CharField(max_length=50, blank=True)
+    datedone = models.DateField()
+    status = models.CharField(max_length=20, choices=MY_CHOICES)
+    
+    def __str__(self):
+        return self.jobname
     
 class Supplier(models.Model):
     name = models.CharField(max_length=50)

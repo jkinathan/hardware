@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="inventorys">Inventory Purchased:</label>
-                            <select name="inventory_purchased" id="inventory_purchased">
+                            <select class="selectpicker form-control" name="inventory_purchased" id="inventory_purchased">
                             {% for invent in inventorys %}
                                 <option value="{{ invent.id }}">{{ invent.name }}</option>
                             {% endfor %}
@@ -40,7 +40,7 @@
 
                         <div class="form-group">
                             <label for="quantity">Quantity:</label>
-                            <input type="number" min="1" max="15" class="form-control" id="quantity" placeholder="{{ customer.quantity }}" name="quantity" value="{{ customer.quantity }}">
+                            <input type="number" min="1" class="form-control" id="quantity" placeholder="{{ customer.quantity }}" name="quantity" value="{{ customer.quantity }}">
                         </div>
 
                         <div class="form-group">

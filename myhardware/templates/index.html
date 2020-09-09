@@ -79,7 +79,7 @@
                                 <td>{{ customer.amount }}</td>
                                 <td>{{ customer.balance }}</td>
                                 <td>{{ customer.date }}</td>
-                                <td><a href="{% url 'customerdetail' customer.id %}">Edit</a></td>
+                                <td><a href="{% url 'customerdetail' customer.id %}" style="color: green;">Edit</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

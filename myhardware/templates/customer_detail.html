@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="inventorys">Inventory Purchased:</label>
-                            <select id="inventory_purchased" name="inventory_purchased">
+                            <select class="selectpicker form-control" id="inventory_purchased" name="inventory_purchased">
                                 <option value="{{ customer.inventory_purchased.id }}" selected="selected">{{ customer.inventory_purchased  }}</option>
                                 {% for invent in inventorys %}
                                 <option value="{{ invent.id }}">{{ invent.name }}</option>

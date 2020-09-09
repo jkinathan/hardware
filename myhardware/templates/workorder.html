@@ -5,7 +5,16 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Work Orders</h4> 
+                <h4 class="page-title">Work Orders</h4>
+                <span>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message|safe }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </span> 
             </div>
         </div>
         <!--row -->
@@ -26,7 +35,7 @@
                                 <th>Balance (UGX)</th>
                                 <th>Order status</th>
                                 <th>Date</th>
-                                
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +54,7 @@
                                 {% endif %}
                                 
                                 <td>{{ wo.date }}</td>
+                                <td><a href="{% url 'workorderdetail' wo.id %}" style="color: green;">Edit</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
