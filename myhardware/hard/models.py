@@ -76,7 +76,6 @@ class Technician(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     number = models.CharField(max_length=15)
-    
     inventory_purchased = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1,null=False)
     amount = models.CharField(max_length=100)

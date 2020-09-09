@@ -58,24 +58,21 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
-            <div class="navbar-header">
+            <div class="navbar-header" style="background: green;">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="dashboard.html">
+                    <a class="logo" href="/">
                         <!-- Logo icon image, you can use font-icon also -->
                         <b>
                             <!--This is dark logo icon-->
-                            <img src="{% static 'plugins/images/admin-logo.png' %}" alt="home" class="dark-logo" />
+                            {% comment %} <img src="{% static 'plugins/images/admin-logo.png' %}" alt="home" class="dark-logo" /> {% endcomment %}
                             <!--This is light logo icon-->
-                            <img src="{% static 'plugins/images/admin-logo-dark.png' %}" alt="home" class="light-logo" />
+                            <img src="{% static 'images/hardwarelogo.jpg' %}" alt="home" class="light-logo" style="height:50px;" />
                         </b>
                         <!-- Logo text image you can use text also -->
-                        <span class="hidden-xs">
-                            <!--This is dark logo text-->
-                            <img src="{% static 'plugins/images/admin-text.png' %}" alt="home" class="dark-logo" />
-                            <!--This is light logo text-->
-                            <img src="{% static 'plugins/images/admin-text-dark.png' %}" alt="home" class="light-logo" />
-                        </span> 
+                        <span style="color: green;font-weight: bold;">
+                            United Diesel
+                        </span>
                     </a>
                 </div>
                 <!-- /Logo -->
@@ -107,7 +104,7 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav slimscrollsidebar">
                 <div class="sidebar-head">
-                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">UNITED DIESEL</span></h3>
                 </div>
 
                 <ul class="nav" id="side-menu">
