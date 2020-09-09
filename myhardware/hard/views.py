@@ -4,6 +4,7 @@ from django.contrib import messages
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.views.generic.edit import FormView 
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -17,6 +18,7 @@ def Autoguy(request):
         return JsonResponse(names, safe=False)
     return render(request, 'customer_create.html')
 
+@login_required
 def index(request):
     customers = Customer.objects.all()
     customercount = Customer.objects.all().count()
@@ -29,7 +31,7 @@ def index(request):
               }
     return render(request, 'index.html', context)
 
-
+@login_required
 def Createcustomer(request):
     customer = Customer()
     inventorys = Inventory.objects.all()
@@ -60,6 +62,7 @@ def Createcustomer(request):
               }
     return render(request, 'customer_create.html',context)
 
+@login_required
 def Customerdetailfunc(request, pk):
     inventorys = Inventory.objects.all()
     customer = get_object_or_404(Customer, pk=pk)
@@ -91,18 +94,21 @@ def Customerdetailfunc(request, pk):
 
     return render(request, 'customer_detail.html', context)
 
+@login_required
 def inventory(request):
     inventorys = Inventory.objects.all()
     context ={'inventorys':inventorys
               }
     return render(request, 'inventory.html', context)
 
+@login_required
 def technician(request):
     technicians = Technician.objects.all()
     context ={'technicians':technicians
               }
     return render(request, 'technician.html', context)
 
+@login_required
 def workorder(request):
     workorders = Workorder.objects.all()
     context ={'workorders':workorders
