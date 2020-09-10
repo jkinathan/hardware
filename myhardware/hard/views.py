@@ -161,6 +161,32 @@ def Createworkorder(request):
               }
     return render(request, 'workorder_create.html',context)
 
+
+@login_required
+def Createreturnjob(request):
+    returnjob = ReturnJobs()
+    customers = Customer.objects.filter(addedby=request.user)
+    if request.method == "POST":
+        
+        if "createreturnjob" in request.POST: 
+            
+            returnjob.jobname = request.POST["rjname"] 
+            #workorder.number = request.POST["number"]
+            customerid = request.POST["name"] 
+            returnjob.customer_name = get_object_or_404(Customer,id=customerid)
+            returnjob.complaint = request.POST["complaint"]
+            returnjob.partnumber = request.POST["partnumber"]
+            returnjob.datedone  = request.POST["datedone"]
+            returnjob.status = request.POST["statusr"]
+            returnjob.save()
+
+            messages.success(request, 'Returnjob added Successfully!!')
+            return redirect('returnjobs')
+                        
+    context ={'customers':customers
+              }
+    return render(request, 'returnjob_create.html',context)
+
 @login_required
 def Workorderdetailfunc(request, pk):
     jobtypes = JobType.objects.all()
@@ -196,6 +222,35 @@ def Workorderdetailfunc(request, pk):
     return render(request, 'workorder_detail.html',context)
 
 @login_required
+def Returnjobdetailfunc(request, pk):
+
+    customers = Customer.objects.filter(addedby=request.user)
+
+    returnjob = get_object_or_404(ReturnJobs, pk=pk)
+    if request.method == "POST":
+        
+        if "updatereturnjob" in request.POST: 
+            
+            returnjob.jobname = request.POST["rjname"] 
+            #workorder.number = request.POST["number"]
+            customerid = request.POST["name"] 
+            returnjob.customer_name = get_object_or_404(Customer,id=customerid)
+            
+            returnjob.complaint = request.POST["complaint"] 
+            returnjob.partnumber = request.POST["partnumber"]
+            returnjob.datedone = request.POST["datedone"]
+            returnjob.status = request.POST["statusr"]
+
+            returnjob.save()
+
+            messages.success(request, 'Return Job Updated Successfully!!')
+            return redirect('returnjobs')
+                        
+    context ={'customers':customers,'returnjob':returnjob
+              }
+    return render(request, 'returnjob_detail.html',context)
+
+@login_required
 def inventory(request):
     inventorys = Inventory.objects.all()
     context ={'inventorys':inventorys
@@ -215,3 +270,11 @@ def workorder(request):
     context ={'workorders':workorders
               }
     return render(request, 'workorder.html', context)
+
+
+@login_required
+def ReturnJobo(request):
+    returnjobs = ReturnJobs.objects.all()
+    context ={'returnjobs':returnjobs
+              }
+    return render(request, 'returnjobs.html', context)

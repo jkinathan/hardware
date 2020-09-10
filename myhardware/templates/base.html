@@ -35,6 +35,7 @@
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
+        
     } );
     </script>
     
@@ -140,8 +141,16 @@
                     <li>
                         <a href="{% url 'createworkorder' %}" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Create Work Order</a>
                     </li>
+
                     <li>
-                        <a href="{% url 'technicians' %}" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Technicians</a>
+                        <a href="{% url 'returnjobs' %}" class="waves-effect"><i class="fa fa-tasks fa-fw" aria-hidden="true"></i>Return Jobs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'createreturnjobs' %}" class="waves-effect"><i class="fa fa-tasks fa-fw" aria-hidden="true"></i>Create Return Job</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'technicians' %}" class="waves-effect"><i class="fa fa-wrench fa-fw" aria-hidden="true"></i>Technicians</a>
                     </li>
                     <li>
                         <a href="{% url 'account_logout' %}" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Log out</a>
@@ -192,6 +201,7 @@
         });
     } );
     </script>
+
 
 </body>
 

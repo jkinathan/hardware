@@ -116,7 +116,7 @@ class ReturnJobs(models.Model):
     customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
     complaint = models.TextField(max_length=200, blank=True)
     partnumber = models.CharField(max_length=50, blank=True)
-    datedone = models.DateField()
+    datedone = models.DateTimeField()
     status = models.CharField(max_length=20, choices=MY_CHOICES)
     
     def __str__(self):
