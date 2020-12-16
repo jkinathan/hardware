@@ -5,9 +5,18 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, request
 from django.views.generic.edit import FormView 
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.core import serializers
 # Create your views here.
 
+def dashboard_with_pivot(request):
+    return render(request, 'dashboard_with_pivot.html',{})
 
+def pivot_data(request):
+    dataset = Customer.objects.all()
+    data = serializers.serialize('json',dataset)
+    return JsonResponse(data,safe=False)
+     
 def Autoguy(request):
     if 'term' in request.GET:
         qs = Customer.objects.filter(name__icontains=request.GET.get('term')).distinct()
