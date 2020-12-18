@@ -52,6 +52,8 @@ class Inventory(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.picture.url))
     picture_tag.short_description = 'Picture'
        
+    # def serialize(self):
+    #     return self.__dict__
     def __str__(self):
         return self.name
 # class InventoryType(models.Model):

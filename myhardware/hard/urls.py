@@ -1,9 +1,15 @@
 from django.urls import path, include
 from django.conf.urls import url
 from . import views
+from .views import ChartData
 
 urlpatterns = [
     path('',views.index,name='index'),
+
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('api/data', views.get_data, name='api_data'),
+    path('api/chart/data', ChartData.as_view(), name='chart_data'),
+
     path('inventory/',views.inventory,name='inventory'),
     path('technicians/',views.technician,name='technicians'),
     path('workorders/',views.workorder,name='workorders'),

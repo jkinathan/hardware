@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, request
@@ -7,16 +8,81 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core import serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.core import serializers
+from django.forms.models import model_to_dict
+
+
+User = get_user_model()
 # Create your views here.
 
-def dashboard_with_pivot(request):
-    return render(request, 'dashboard_with_pivot.html',{})
+def dashboard(request):
+    return render(request,'base/dashboard.html',{})
 
-def pivot_data(request):
-    dataset = Customer.objects.all()
-    data = serializers.serialize('json',dataset)
-    return JsonResponse(data,safe=False)
-     
+def get_data(request):
+
+    #  Inventory.objects.all()
+    invents = serializers.serialize("json", Inventory.objects.all())
+    inventnum = []
+    #print(invents)
+    
+    print("Before..............")
+    for j in invents:
+        print(j[0["name"]])
+        # inventnum.append(j.key == "quantity")
+
+    
+    # print(inventnum)
+    
+    # dict_obj = model_to_dict( invents )
+    # invent = json.dumps(dict_obj)
+    
+    labels = []
+    for i in invents:
+        labels.append(i)
+    
+    
+    
+    default_items  = inventnum 
+    data = {
+        "labels":labels,
+        "default":default_items,
+    }
+    return JsonResponse(data)
+
+
+class ChartData(APIView):
+    
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        #qs_count = User.objects.all().count()
+        
+        invents = Inventory.objects.filter(quantity>1)
+        dict_obj = model_to_dict( invents )
+        invent = json.dumps(dict_obj)
+        labels = []
+        for i in invent:
+            labels.append(i)
+        inventnum = []
+        for j in invent:
+            inventnum.append(j.quantity)
+        
+        default_items  = inventnum 
+
+        data = {
+                "labels":labels,
+                "default":default_items,
+                
+            }
+        return JsonResponse(data)
+
+
+
+
+
 def Autoguy(request):
     if 'term' in request.GET:
         qs = Customer.objects.filter(name__icontains=request.GET.get('term')).distinct()
