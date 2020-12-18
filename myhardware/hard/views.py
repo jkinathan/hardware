@@ -12,7 +12,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core import serializers
 from django.forms.models import model_to_dict
-
+from django.db.models.functions import TruncMonth
+from django.db.models import Count
 
 User = get_user_model()
 # Create your views here.
@@ -24,23 +25,35 @@ def get_data(request):
 
     #  Inventory.objects.all()
     invents = serializers.serialize("json", Inventory.objects.all())
-    inventnum = []
-    #print(invents)
+    works = serializers.serialize("json", Workorder.objects.all())
     
-    print("Before..............")
-    for j in invents:
-        print(j[0["name"]])
-        # inventnum.append(j.key == "quantity")
 
     
-    # print(inventnum)
+    #workorders
+    worker = []
+
+    for j in json.loads(works):
+        print(j)
+        worker.append(j["fields"]["balance"])
+            
+    worklabels = []
+    for i in json.loads(works):
+        worklabels.append(i["fields"]["ordername"])    
+
+
+
+
+    #inventory
+    inventnum = []
     
-    # dict_obj = model_to_dict( invents )
-    # invent = json.dumps(dict_obj)
-    
+    print("Before..............")
+
+    for j in json.loads(invents):
+        inventnum.append(j["fields"]["quantity"])
+            
     labels = []
-    for i in invents:
-        labels.append(i)
+    for i in json.loads(invents):
+        labels.append(i["fields"]["name"])
     
     
     
@@ -48,6 +61,8 @@ def get_data(request):
     data = {
         "labels":labels,
         "default":default_items,
+        "worklabels":worklabels,
+        "worker":worker
     }
     return JsonResponse(data)
 

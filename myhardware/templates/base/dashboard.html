@@ -12,16 +12,18 @@ $.ajax({
     success: function(data){
         labels = data.labels
         defaultData = data.default
+        worklabels = data.worklabels
+        worker = data.worker
         //console.log(data)
         var ctx = document.getElementById('myChart');
         var ctx2 = document.getElementById('myChart2');
         var myChart2 = new Chart(ctx2, {
-            type: 'pie',
+            type: 'bar',
             data: {
-                labels: labels,
+                labels: worklabels,
                 datasets: [{
-                    label: '# of Votes',
-                    data: defaultData,
+                    label: 'Work Orders',
+                    data: worker,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -56,7 +58,7 @@ $.ajax({
             data: {
                 labels: labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Inventory',
                     data: defaultData,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
