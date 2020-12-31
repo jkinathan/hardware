@@ -31,6 +31,10 @@ def get_data(request):
     
     #workorders
     worker = []
+    amountpaid = []
+
+    for p in json.loads(works):
+        amountpaid.append(p["fields"]["amount_paid"])
 
     for j in json.loads(works):
         print(j)
@@ -38,7 +42,7 @@ def get_data(request):
             
     worklabels = []
     for i in json.loads(works):
-        worklabels.append(i["fields"]["ordername"])    
+        worklabels.append(i["fields"]["date"])    
 
 
 
