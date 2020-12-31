@@ -34,7 +34,7 @@ def get_data(request):
     amountpaid = []
 
     for p in json.loads(works):
-        amountpaid.append(p["fields"]["amount_paid"])
+        amountpaid.append(p["fields"]["balance"])
 
     for j in json.loads(works):
         print(j)
