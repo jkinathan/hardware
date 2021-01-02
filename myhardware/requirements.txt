@@ -1,6 +1,6 @@
 appdirs==1.4.3
-apt-clone==0.2.1
-apturl==0.5.2
+# apt-clone==0.2.1
+# apturl==0.5.2
 asgiref==3.3.1
 astroid==2.4.2
 beautifulsoup4==4.8.2
@@ -10,8 +10,6 @@ certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
 colorama==0.4.3
-command-not-found==0.3
-configobj==5.0.6
 crudini==0.9.3
 cryptography==2.8
 cupshelpers==1.0
@@ -100,8 +98,8 @@ systemd-python==234
 testresources==2.0.1
 tinycss2==1.0.2
 toml==0.10.2
-ubuntu-advantage-tools==20.3
-ubuntu-drivers-common==0.0.0
+# ubuntu-advantage-tools==20.3
+# ubuntu-drivers-common==0.0.0
 ufw==0.36
 Unidecode==1.1.1
 urllib3==1.25.8
