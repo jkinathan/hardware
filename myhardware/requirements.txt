@@ -11,7 +11,7 @@ chardet==3.0.4
 Click==7.0
 colorama==0.4.3
 crudini==0.9.3
-cryptography==3.2
+cryptography==3.3.2
 cupshelpers==1.0
 dbus-python==1.2.16
 defer==1.0.6
