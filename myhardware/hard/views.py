@@ -27,8 +27,6 @@ def get_data(request):
     invents = serializers.serialize("json", Inventory.objects.all())
     works = serializers.serialize("json", Workorder.objects.all())
     
-
-    
     #workorders
     worker = []
     amountpaid = []
@@ -50,8 +48,6 @@ def get_data(request):
     #inventory
     inventnum = []
     
-    print("Before..............")
-
     for j in json.loads(invents):
         inventnum.append(j["fields"]["quantity"])
             

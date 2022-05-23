@@ -18,6 +18,14 @@ class Inventory(models.Model):
         ('Housings', 'Housings'),
         ('Switches', 'Switches'),
         ('Gasket Kit', 'Gasket Kit'),
+        ('Air Cleaners', 'Air Cleaners'),
+        ('Pistons', 'Pistons'),
+        ('Bearings', 'Bearings'),
+        ('Brake Pads', 'Brake Pads'),
+        ('Rings', 'Rings'),
+        ('Piece & Main', 'Piece & Main'),
+        ('Filters', 'Filters'),
+        ('Oil Seals', 'Oil Seals'),
     )
     LOCATION = (
         ('Home Store', 'Home Store'),
