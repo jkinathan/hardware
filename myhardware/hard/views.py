@@ -19,7 +19,27 @@ User = get_user_model()
 # Create your views here.
 
 def dashboard(request):
-    return render(request,'base/dashboard.html',{})
+
+    labels = []
+    data = []
+
+    stocks = Inventory.objects.all().order_by('-name')
+    customers2 = Customer.objects.all()
+    customers = Customer.objects.values('inventory_purchased').annotate(mycount=Count('inventory_purchased')).order_by('inventory_purchased').filter(date__lte="2022-06-06")
+    # Chart data
+    
+    for stockData in stocks:
+        labels.append(stockData.name)
+    
+    
+    for stockData in customers:
+        data.append(stockData['mycount'])
+
+    
+    context ={'labels': labels,
+              'data': data,
+    }
+    return render(request,'base/dashboard.html',context)
 
 def get_data(request):
 

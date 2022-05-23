@@ -8,10 +8,13 @@ class InventoryAdmin(admin.ModelAdmin):
 class WorkorderAdmin(admin.ModelAdmin):
     list_display = ['ordername','customer_name','jobtype', 'technician','order_status']
 
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['name','number','inventory_purchased', 'quantity','date']
+
 admin.site.register(Inventory,InventoryAdmin),
 admin.site.register(JobType),
 admin.site.register(Technician),
-admin.site.register(Customer),
+admin.site.register(Customer,CustomerAdmin),
 admin.site.register(ReturnJobs),
 admin.site.register(Workorder,WorkorderAdmin)
 admin.site.register(Supplier),
