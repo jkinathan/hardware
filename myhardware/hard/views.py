@@ -13,23 +13,34 @@ from rest_framework.response import Response
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.db.models.functions import TruncMonth
-from django.db.models import Count
+from django.db.models import Count, F
+from datetime import datetime
 
 User = get_user_model()
 # Create your views here.
 
 def dashboard(request):
 
+    myDate = datetime.now()
+
     labels = []
     data = []
 
-    stocks = Inventory.objects.all().order_by('-name')
-    customers2 = Customer.objects.all()
-    customers = Customer.objects.values('inventory_purchased').annotate(mycount=Count('inventory_purchased')).order_by('inventory_purchased').filter(date__lte="2022-06-06")
+    if "plotChart" in request.POST:    
+        datestart = request.POST["start_date"]
+        dateend = request.POST["end_date"] 
+
+        customers = Customer.objects.values('inventory_purchased__name').annotate(mycount=Count('inventory_purchased')).order_by('inventory_purchased').filter(date__lte=dateend,date__gte=datestart)
+    else:
+        customers = Customer.objects.values('inventory_purchased__name').annotate(mycount=Count('inventory_purchased')).order_by('inventory_purchased').filter(date__lte=myDate.strftime("%Y-%m-%d"))
+
     # Chart data
+
+    print("------here--------")
+    print(customers)
     
-    for stockData in stocks:
-        labels.append(stockData.name)
+    for stockData in customers:
+        labels.append(stockData['inventory_purchased__name'])
     
     
     for stockData in customers:
@@ -39,7 +50,7 @@ def dashboard(request):
     context ={'labels': labels,
               'data': data,
     }
-    return render(request,'base/dashboard.html',context)
+    return render(request,'dashboard.html',context)
 
 def get_data(request):
 
