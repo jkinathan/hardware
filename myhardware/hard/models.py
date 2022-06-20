@@ -32,7 +32,7 @@ class Inventory(models.Model):
         ('Work Store', 'Work Store'),
     )
     name = models.CharField(max_length=100)
-    picture = models.ImageField(null=True, blank=True,upload_to='images/')
+    picture = models.ImageField(null=False, blank=False,upload_to='images/')
     inventory_Type = models.CharField(max_length=50, choices=TYPES,blank=True)
     i_type = models.CharField(max_length=100,blank=True)
     engine = models.CharField(max_length=100,blank=True)
